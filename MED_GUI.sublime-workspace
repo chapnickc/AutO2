@@ -1,0 +1,536 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Clock",
+				"ClockEvent"
+			],
+			[
+				"Clo",
+				"ClockEvent"
+			],
+			[
+				"plot",
+				"plot_flow"
+			],
+			[
+				"conver",
+				"convert_value"
+			],
+			[
+				"hex",
+				"hex_value"
+			],
+			[
+				"read",
+				"read_sensor"
+			],
+			[
+				"data",
+				"data_file"
+			],
+			[
+				"flow",
+				"flow_files"
+			],
+			[
+				"crea",
+				"create_data_file"
+			],
+			[
+				"new",
+				"new_file_name"
+			],
+			[
+				"Tabb",
+				"TabbedPanelHeader"
+			],
+			[
+				"th",
+				"th_text_head"
+			],
+			[
+				"acct_bal",
+				"acct_balances"
+			],
+			[
+				"b",
+				"b"
+			],
+			[
+				"ask",
+				"ask_name"
+			],
+			[
+				"account",
+				"account_num"
+			],
+			[
+				"morse",
+				"morse_equiv"
+			],
+			[
+				"list",
+				"lstlisting"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "flow_reader.py",
+			"settings":
+			{
+				"buffer_size": 2850,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/chapnick/Google_Drive/Python/practice_threading.py",
+			"settings":
+			{
+				"buffer_size": 294,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "data_handler.py",
+			"settings":
+			{
+				"buffer_size": 2944,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /RaspberryPi_GPIO_example.py",
+			"settings":
+			{
+				"buffer_size": 2224,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "test_events.py",
+			"settings":
+			{
+				"buffer_size": 5214,
+				"line_ending": "Unix"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "REPL Shel",
+		"selected_items":
+		[
+			[
+				"REPL Shel",
+				"SublimeREPL: Shell"
+			],
+			[
+				"REPL r",
+				"SublimeREPL: R"
+			],
+			[
+				"REPL Py",
+				"SublimeREPL: Python - IPython"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 521.0
+	},
+	"console":
+	{
+		"height": 139.0,
+		"history":
+		[
+			"print ('hi')",
+			"print (hello)",
+			"ls",
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib"
+	],
+	"file_history":
+	[
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/homework_7.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/motor.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /flow_sensor_read_test.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /configure_i2c.txt",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/real_time_data_server.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Sample_data/convert_data.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/data_handler.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /potentiometer_reading.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/Local R Pi/GUI/tabbedpannel.py",
+		"/home/chapnick/Desktop/scrollview_test.py",
+		"/home/chapnick/Desktop/dropdown_test.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /Motor Class rev1.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /motor_control_test_1.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/test_events.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/o2_android.py",
+		"/home/chapnick/Desktop/sm_test.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/test_2_review.py",
+		"/home/chapnick/Desktop/mpl_test.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Sample_data/28400089.txt",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/mydata_output.txt",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Sample_data/convert_data.",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib/backend_kivy.py",
+		"/home/chapnick/MEDlaunch/Rpi/real_time_client_DR3.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/Lab/Lab_7_RC_Time_Constants/lab7_report.tex",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/o2_App.py",
+		"/home/chapnick/.config/sublime-text-3/Packages/User/Default (Linux).sublime-keymap",
+		"/home/chapnick/.config/sublime-text-3/Packages/User/Preferences.sublime-settings",
+		"/home/chapnick/.config/sublime-text-3/Packages/Default/Preferences.sublime-settings",
+		"/home/chapnick/.config/sublime-text-3/Packages/User/sublemacspro.sublime-settings",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/pre_lab_6.py",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/MED_GUI.sublime-project",
+		"/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/GUI/NEW/testfile2.txt",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/homework_7.tex",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/NEW/test_plt.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/NEW/test_events.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/OLD/o2_android_DR3.py",
+		"/home/chapnick/MEDlaunch/Rpi/real_time_data_server.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/NEW/data_handler.py",
+		"/home/chapnick/MEDlaunch/Rpi/real_time_plt.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/Lab/Lab_7_RC_Time_Constants/pre_lab_7.tex",
+		"/home/chapnick/Google_Drive/Resume/cv_8.tex",
+		"/home/chapnick/Google_Drive/Resume/cv_8.sublime-project",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/feb_23/BankAccount.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/feb_23/chapnickc_bank.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/feb_23/BankTest.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/feb_23/Bank.py",
+		"/home/chapnick/.config/sublime-text-3/Packages/sublemacspro/Default.sublime-keymap",
+		"/home/chapnick/.config/sublime-text-3/Packages/sublemacspro/sublemacspro.sublime-settings",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/PP4/pp4.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/PP4/translator.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/chapnickc_pp4.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/chapnickc_pp4_test.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/Lab/Lab_6_Thevenin/lab6_report.tex",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/Lab/Lab_5_Wheatstone_Bridge/lab5_report.tex",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/chapnickc_pp3.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.sublime-project",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/chapnickc_",
+		"/home/chapnick/.config/sublime-text-3/Packages/User/JSON.sublime-settings",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/chapnickc_lab_quiz_6.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib/examples/test_plt.py",
+		"/home/chapnick/MEDlaunch/Rpi/real_time_client_plt.py",
+		"/home/chapnick/MEDlaunch/Rpi/real_time_plt_sentdex.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib/examples/test_events.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib/examples/test_backend.py",
+		"/home/chapnick/MEDlaunch/Rpi/GUI/garden.matplotlib/examples/test_",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/homework_6.tex",
+		"/home/chapnick/Google_Drive/i_grow_up_R/WHO_standards.R",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/homework_7.py",
+		"/home/chapnick/Google_Drive/Saint Louis University/Spring 2016 Courses/OOP/homework_7_test.py",
+		"/home/chapnick/.config/sublime-text-3/Packages/Default/Default (Linux).sublime-keymap"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"draw_event",
+			"asd",
+			"	\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "flow_reader.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2850,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2723,
+								2723
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1345.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/home/chapnick/Google_Drive/Python/practice_threading.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 294,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								139,
+								139
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "data_handler.py",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 2944,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 918.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/home/chapnick/Google_Drive/MEDLaunch/AutO2/Engineer/Programs/Raspberry PI /RaspberryPi_GPIO_example.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2224,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								11,
+								11
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 4,
+					"file": "test_events.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5214,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3960,
+								3960
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 2139.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 33.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "MED_GUI.sublime-project",
+	"replace":
+	{
+		"height": 46.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"~/Google_Drive/Saint Louis University/Spring 2016 Courses/Circuits/Lab/circuits.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 265.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
