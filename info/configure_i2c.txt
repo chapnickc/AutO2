@@ -1,0 +1,18 @@
+#configuring i2c commands
+sudo nano /etc/modules
+
+# next you append the two lines to the file above
+i2c-bcm2708
+i2c-dev
+
+# edit the file 
+/boot/config.txt
+
+# added the line
+dtparam=i2c1=on
+
+# to detect i2c device, this gives the i2cbus
+sudo i2cdetect -y 1
+
+# this grabs the flow 
+sudo i2cget -y 1 0x49
