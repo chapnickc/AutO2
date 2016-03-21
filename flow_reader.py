@@ -25,6 +25,7 @@ class FlowReader:
 		self.i2c_bus = None
 		self.values = []
 
+
 	def configure(self):
 		"""
 		Open a file to record data from and get the i2c_bus.

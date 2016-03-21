@@ -65,6 +65,7 @@ class Test(BoxLayout):
         self.wid, self.ax = self.get_fc(1)
         self.add_widget(self.wid)
         self.add_mybuttons()
+        self.listener = None
 
 
     def get_fc(self, i):
@@ -121,11 +122,7 @@ class Test(BoxLayout):
             #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
             self.ax.figure.canvas.draw()
             print ('Drawing flow')
-
-        
-
-
-
+  
     def start_sock_listen(self):
         """
         This will be called by a button press. Subseqently
@@ -133,18 +130,19 @@ class Test(BoxLayout):
         this class every 0.5 seconds to update the graph.
         """
         Clock.schedule_interval(lambda x: self.animate(), 0.5)
+        print ('sock listening')
 
     def stop_sock_listen(self):
         Clock.unschedule(lambda x: self.animate())
         dh.disconnect()
 
     def start_flow_listen(self):
-        Clock.schedule_interval(lambda x: self.plot_flow(), 0.5)
-    
+        self.listener = Clock.schedule_interval(lambda x: self.plot_flow(), 0.5)
+
     def stop_flow_listen(self):
-        #Clock.unschedule(lambda x: self.plot_flow(), all = True)
-        #Clock.unschedule(self.plot_flow)
-        Clock.schedule_once(lambda x: self.plot_flow(), 0.5)
+        #Clock.unschedule(lambda x: self.plot_flow())
+        self.listener.cancel()
+        #Clock.schedule_once(lambda x: self.plot_flow(), 0.5)
         print ('unscheduled')
 
     def add_mybuttons(self):
@@ -182,9 +180,10 @@ class Test(BoxLayout):
 class TestApp(App):
     def build(self):
         return Test()
+
+def main():
+    TestApp().run()
     
 
 if __name__ == '__main__':
-    TestApp().run()
-
-
+    main()
