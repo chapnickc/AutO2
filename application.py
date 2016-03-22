@@ -5,7 +5,6 @@ from kivy.uix.button import Button
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 from kivy.clock import Clock, ClockEvent
 
-
 import matplotlib.pyplot as plt
 
 from time import sleep
@@ -174,6 +173,7 @@ class Test(BoxLayout):
                  size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.stop_flow_listen())
         self.add_widget(b)
+
 
 
 
