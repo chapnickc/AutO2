@@ -17,10 +17,10 @@ class Motor:
     STEP = 18
     
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(EN, GPIO.out)
-    GPIO.setup(DIR, GPIO.out)
-    GPIO.setup(STEP, GPIO.out)
-    GPIO.setup(FLOW, GPIO.input)
+    GPIO.setup(Motor.EN, GPIO.out)
+    GPIO.setup(Motor.DIR, GPIO.out)
+    GPIO.setup(Motor.STEP, GPIO.out)
+    GPIO.setup(Motor.FLOW, GPIO.input)
  #   GPIO.setup(17, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
     def __init__(self):
