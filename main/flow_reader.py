@@ -86,7 +86,7 @@ class FlowReader:
 		f.write(date)
 
 		# Leaving the file open for performance reasons.
-		f.close()
+		#f.close()
 
 		# modify the attribute
 		self.data_file = f
@@ -99,7 +99,7 @@ class FlowReader:
 		try:
 			# get the flow as a hex value
 			command = 'sudo i2cget -y 1 {}'.format(self.i2c_bus)
-			p = subprocess.Popen(command, stdout=subprocess.PIPE)
+			p = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 
 			# get the output from the process and convert from 
 			# byte code to a string
@@ -108,7 +108,7 @@ class FlowReader:
 			#print ("Cant't read sensor: {}".format(e))
 			self.values.append(0)
 		else:
-			flow_value = hex_value # need to add the conversion formula
+			flow_value = 15*((hex_value/16384) - 0.1)/0.8
 
 			self.values.append(flow_value)
 			self.data_file.write(flow_value)
