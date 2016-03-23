@@ -108,7 +108,8 @@ class FlowReader:
 			#print ("Cant't read sensor: {}".format(e))
 			self.values.append(0)
 		else:
-			flow_value = 15*((hex_value/16384) - 0.1)/0.8
+			dec_value = int(hex_value, 16)
+			flow_value = 15*((dec_value/16384) - 0.1)/0.8
 
 			self.values.append(flow_value)
 			self.data_file.write(flow_value)
