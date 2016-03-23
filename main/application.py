@@ -89,13 +89,10 @@ class Test(BoxLayout):
         Read data from the socket and update the graph
         """
         try:
-            #values, count = dh.listen()
             dh.listen()
         except:
             pass
-            #print ("We're having issues")
         else:
-            #print (dh.values)
             xs = [x for x in range(len(dh.values))]
 
             self.ax.clear()
@@ -139,10 +136,8 @@ class Test(BoxLayout):
         self.listener = Clock.schedule_interval(lambda x: self.plot_flow(), 0.5)
 
     def stop_flow_listen(self):
-        #Clock.unschedule(lambda x: self.plot_flow())
         self.listener.cancel()
-        #Clock.schedule_once(lambda x: self.plot_flow(), 0.5)
-        print ('unscheduled')
+        print ('Flow Listening Canceled')
 
     def add_mybuttons(self):
         """
@@ -173,8 +168,6 @@ class Test(BoxLayout):
                  size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.stop_flow_listen())
         self.add_widget(b)
-
-
 
 
 class TestApp(App):

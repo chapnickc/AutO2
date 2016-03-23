@@ -22,22 +22,22 @@ class FlowReader:
 
 	def __init__(self,):
 		self.data_file = None
-		self.i2c_bus = None
+		self.i2c_bus = '0x49'
 		self.values = []
 
 
-	def configure(self):
-		"""
-		Open a file to record data from and get the i2c_bus.
-		"""
-		try:
-			p = subprocess.Popen('sudo i2cdetect -y 1', stdout=subprocess.PIPE)
-			i2c_bus = p.communicate()[0]	# was 0x49 last time
-		except OSError as e:
-			pass
-			#print ("Can't get the i2c bus {}".format(e))
-		else:
-			self.i2c_bus = i2c_bus
+	# def configure(self):
+	# 	"""
+	# 	Open a file to record data from and get the i2c_bus.
+	# 	"""
+	# 	try:
+	# 		p = subprocess.Popen('sudo i2cdetect -y 1', stdout=subprocess.PIPE)
+	# 		i2c_bus = p.communicate()[0]	# was 0x49 last time
+	# 	except OSError as e:
+	# 		pass
+	# 		#print ("Can't get the i2c bus {}".format(e))
+	# 	else:
+	# 		self.i2c_bus = i2c_bus
 
 
 	def create_data_file(self):
@@ -121,7 +121,6 @@ if __name__ == '__main__':
 	print (sys.version)
 
 	fr = FlowReader()
-	fr.configure()
 	fr.create_data_file()
 
 	for i in range(10):
