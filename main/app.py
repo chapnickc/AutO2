@@ -21,6 +21,7 @@ class Test(BoxLayout):
         
         self.wid, self.ax = self.get_fc(1)
         self.add_widget(self.wid)
+        self.add_buttons()
 
 
 
