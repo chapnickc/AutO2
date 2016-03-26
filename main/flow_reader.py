@@ -104,13 +104,16 @@ class FlowReader:
 			# get the output from the process and convert from 
 			# byte code to a string
 			hex_value = str(p.communicate()[0])
+
+			if not hex_value == '':
+				dec_value = int(hex_value, 16)
+				flow_value = 15*((dec_value/16384) - 0.1)/0.8
+			elif hex_value == '':
+				raise OSError
 		except OSError as e:
 			#print ("Cant't read sensor: {}".format(e))
 			self.values.append(0)
 		else:
-			dec_value = int(hex_value, 16)
-			flow_value = 15*((dec_value/16384) - 0.1)/0.8
-
 			self.values.append(flow_value)
 			self.data_file.write(flow_value)
 
