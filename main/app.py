@@ -29,7 +29,7 @@ class Test(BoxLayout):
         Build the figure 
         """
         fig = plt.figure()
-        ax1 = fig1.add_subplot(1,1,1) 
+        ax1 = fig.add_subplot(1,1,1) 
         wid = FigureCanvas(fig)
         
         return wid, ax1
