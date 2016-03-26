@@ -34,6 +34,18 @@ class Test(BoxLayout):
         
         return wid, ax1
 
+    def add_buttons(self):
+
+        b = Button(text='Press to read from flow sensor',
+                 size_hint = (0.5, 0.1))
+#        b.bind(on_press = lambda x: self.start_flow_listen())
+        self.add_widget(b)
+
+        b = Button(text='Press to stop reading from flow sensor',
+                 size_hint = (0.5, 0.1))
+#        b.bind(on_press = lambda x: self.stop_flow_listen())
+        self.add_widget(b)
+
 
 
 
