@@ -10,10 +10,8 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 kv = """
 <Test>:
     orientation: 'vertical'
-    Button:
-        size_hint_y: None
-        height: 100
 """
+
 Builder.load_string(kv)
 
 
@@ -24,18 +22,15 @@ class Test(BoxLayout):
         self.wid, self.ax = self.get_fc(1)
         self.add_widget(self.wid)
 
-        b = Button(text = 'test')
-        self.add_widget(b)
-
 
 
     def get_fc(self, i):
         """
-        Build the figure and connect events to the canvas
+        Build the figure 
         """
-        fig1 = plt.figure(facecolor = [0.2,0.2,0.2])
-        ax1 = fig1.add_subplot(1,1,1) #, axisbg = [0.17,0.17,0.17])
-        wid = FigureCanvas(fig1)
+        fig = plt.figure()
+        ax1 = fig1.add_subplot(1,1,1) 
+        wid = FigureCanvas(fig)
         
         return wid, ax1
 
