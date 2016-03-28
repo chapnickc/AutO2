@@ -33,6 +33,12 @@ kv = """
 
 Builder.load_string(kv)
 
+def enter_axes(event):
+    print('enter_axes', event.inaxes)
+    event.inaxes.patch.set_facecolor('yellow')
+    event.canvas.draw()
+
+
 
 class PlotTab(BoxLayout):
     def __init__(self, *args, **kwargs):
@@ -53,6 +59,7 @@ class PlotTab(BoxLayout):
         ax1 = fig.add_subplot(1,1,1) 
         wid = FigureCanvas(fig)
         
+        fig.canvas.mpl_connect('figure_enter_event', enter_figure)
         return wid, ax1
 
     def plot_flow(self):
