@@ -39,17 +39,17 @@ class Test(BoxLayout):
         
         return wid, ax1
 
-        def plot_flow(self):
+    def plot_flow(self):
 
-            fr.read_sensor()
-            xs = [x for x in range(len(fr.values))]
-    
-            self.ax.clear()
-            self.ax.plot(xs, fr.values, linewidth = 3)
-    
-            #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
-            self.ax.figure.canvas.draw()
-            print ('Drawing flow')
+        fr.read_sensor()
+        xs = [x for x in range(len(fr.values))]
+
+        self.ax.clear()
+        self.ax.plot(xs, fr.values, linewidth = 3)
+
+        #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
+        self.ax.figure.canvas.draw()
+        print ('Drawing flow')
 
     def start_flow_listen(self):
         self.listener = Clock.schedule_interval(lambda x: self.plot_flow(), 0.5)
