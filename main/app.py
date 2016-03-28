@@ -59,7 +59,8 @@ class PlotTab(BoxLayout):
         ax1 = fig.add_subplot(1,1,1) 
         wid = FigureCanvas(fig)
         
-        fig.canvas.mpl_connect('figure_enter_event', enter_figure)
+		fig1.canvas.mpl_connect('axes_enter_event', enter_axes)
+        
         return wid, ax1
 
     def plot_flow(self):
