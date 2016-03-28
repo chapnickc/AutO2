@@ -29,6 +29,14 @@ kv = """
             pos: self.pos
             size: self.size
 
+<ParametersTab>:
+    canvas.before:
+        Color:
+            rgba: 1, 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 """
 
 Builder.load_string(kv)
