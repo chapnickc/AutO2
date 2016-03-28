@@ -59,7 +59,7 @@ class PlotTab(BoxLayout):
         ax1 = fig.add_subplot(1,1,1) 
         wid = FigureCanvas(fig)
         
-		fig1.canvas.mpl_connect('axes_enter_event', enter_axes)
+        fig.canvas.mpl_connect('axes_enter_event', enter_axes)
         
         return wid, ax1
 
@@ -127,8 +127,7 @@ class OxygenAdjustment(BoxLayout):
                           background_normal = '',
                           background_color = [0.1, 0.3906, 0.70, 1])
 
-        up_arrow.bind(on_press = callback_1)
-        down_arrow.bind(on_press = callback_2)
+
         dials.add_widget(up_arrow)
         dials.add_widget(down_arrow)
 
