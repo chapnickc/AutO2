@@ -6,10 +6,9 @@ from kivy.clock import Clock
 
 import matplotlib.pyplot as plt
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
+from kivy.garden.androidtabs import *
 
 from flow_reader import FlowReader
-
-fr = FlowReader()
 
 fr = FlowReader()
 
@@ -17,12 +16,25 @@ fr = FlowReader()
 kv = """
 <Test>:
     orientation: 'vertical'
+
+<AndroidTabs>:
+    tab_indicator_height: '8dp'
+    tab_indicator_color: 1, 0, 0, 1
+
+<AndroidTabsBar>:
+    canvas.before:
+        Color:
+            rgba: 0.1, 0.3906, 0.70, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
 """
 
 Builder.load_string(kv)
 
 
-class Test(BoxLayout):
+class PlotTab(BoxLayout):
     def __init__(self, *args, **kwargs):
         super(Test, self).__init__(*args, **kwargs)
         
@@ -62,8 +74,6 @@ class Test(BoxLayout):
         self.listener.cancel()
         print ('Flow Listening canceled')
 
-
-
     def add_buttons(self):
 
         b = Button(text='Press to read from flow sensor',
@@ -78,15 +88,81 @@ class Test(BoxLayout):
 
 
 
+class OxygenAdjustment(BoxLayout):
+    def __init__(self, setting_label, percent,  **kwargs):
+        super(OxygenAdjustment, self).__init__(**kwargs)
+        self.orientation = 'vertical'
+        self.setting_label = setting_label
+        self.percent = percent
 
 
-class TestApp(App):
-    def build(self):
-        return Test()
+        top = Label(text = setting_label,
+                    font_size = 35,
+                    color = [0,0,0,1],
+                    size_hint = (1,0.4))
+        middle = Label(text = str(percent),
+                       font_size = 30,
+                       color = [0,0,0,1],
+                       size_hint = (1, 0.5))
+        
+        dials = BoxLayout(orientation = 'vertical',
+                          padding = [20,5],
+                          spacing = 2,
+                          size_hint = (1,1))
+        
+        up_arrow = Button(text = 'UP', 
+                          font_size = 20,
+                          background_normal = '',
+                          background_color = [0.1, 0.3906, 0.70, 1])
+        down_arrow = Button(text = 'DOWN',
+                          font_size = 20,
+                          background_normal = '',
+                          background_color = [0.1, 0.3906, 0.70, 1])
 
+        up_arrow.bind(on_press = callback_1)
+        down_arrow.bind(on_press = callback_2)
+        dials.add_widget(up_arrow)
+        dials.add_widget(down_arrow)
+
+        self.add_widget(top)
+        self.add_widget(middle)
+        self.add_widget(dials)
+
+
+
+class ParametersTab(BoxLayout):
+    def __init__(self, **kwargs):
+        super(ParametersTab, self).__init__(**kwargs)
+        self.add_widget(OxygenAdjustment(setting_label = 'SPO2 High',
+                                         percent = '99 %'))
+        self.add_widget(OxygenAdjustment(setting_label = 'SPO2 Low',
+                                         percent = '87 %'))
+
+
+class Tab(BoxLayout, AndroidTabsBase):
+    def __init__ (self, **kwargs):
+        super(Tab, self).__init__(**kwargs)
+
+
+class O2App(App):
+	def __init__(self, **kwargs):
+		super(O2App, self).__init__(**kwargs)
+
+	def build(self):
+		tabs = AndroidTabs()
+
+		tab = Tab(text = 'Vitals')
+		tab.add_widget(PlotTab())
+		tabs.add_widget(tab)
+
+		tab = Tab(text = 'Parameters')
+		tab.add_widget(ParametersTab())
+		tabs.add_widget(tab)
+
+		return tabs
 
 if __name__ == '__main__':
-    TestApp().run()
+    O2App().run()
 
 
 
