@@ -14,7 +14,7 @@ fr = FlowReader()
 
 
 kv = """
-<Test>:
+<PlotTab>:
     orientation: 'vertical'
 
 <AndroidTabs>:
@@ -36,7 +36,7 @@ Builder.load_string(kv)
 
 class PlotTab(BoxLayout):
     def __init__(self, *args, **kwargs):
-        super(Test, self).__init__(*args, **kwargs)
+        super(PlotTab, self).__init__(*args, **kwargs)
         
         self.listener = None
         self.wid, self.ax = self.get_fc(1)
