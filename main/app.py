@@ -10,6 +10,9 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 from flow_reader import FlowReader
 
 
+fr = FlowReader()
+fr.create_data_file()
+
 kv = """
 <Test>:
     orientation: 'vertical'
