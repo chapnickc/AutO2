@@ -12,7 +12,7 @@ from flow_reader import FlowReader
 fr = FlowReader()
 
 fr = FlowReader()
-fr.create_data_file()
+
 
 kv = """
 <Test>:

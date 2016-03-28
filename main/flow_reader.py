@@ -104,6 +104,7 @@ class FlowReader:
 			# get the output from the process and convert from 
 			# byte code to a string
 			hex_value = str(p.communicate()[0])
+			print (hex_value)
 
 			if not hex_value == '':
 				dec_value = int(hex_value, 16)
@@ -121,16 +122,16 @@ class FlowReader:
 
 # unit testing
 if __name__ == '__main__':
-
-	import sys
-	print (sys.version)
+	
+	from time import sleep
 
 	fr = FlowReader()
-	fr.create_data_file()
+#	fr.create_data_file()
 
 	for i in range(10):
 		fr.read_sensor()
-		print (fr.values)
+		sleep(0.5)
+#		print (fr.values)
 
 	
 
