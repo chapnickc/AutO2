@@ -9,6 +9,7 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 
 from flow_reader import FlowReader
 
+fr = FlowReader()
 
 kv = """
 <Test>:

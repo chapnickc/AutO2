@@ -108,6 +108,7 @@ class FlowReader:
 			if not hex_value == '':
 				dec_value = int(hex_value, 16)
 				flow_value = 15*((dec_value/16384) - 0.1)/0.8
+				print (flow_value)
 			elif hex_value == '':
 				raise OSError
 		except OSError as e:
@@ -115,7 +116,7 @@ class FlowReader:
 			self.values.append(0)
 		else:
 			self.values.append(flow_value)
-			self.data_file.write(flow_value)
+			#self.data_file.write(flow_value)
 
 
 # unit testing
