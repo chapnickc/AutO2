@@ -1,3 +1,6 @@
+import RPi.GPIO as GPIO
+import time
+
 class Motor:
 
     """ Motor Class which is responsible for turning the motor and keeping track of
@@ -8,19 +11,19 @@ class Motor:
         self._pos   - Holds the currents rotational position of the motor with the net number of steps taken.
     """
     
-    import RPi.GPIO as GPIO
-    import time
+#    import RPi.GPIO as GPIO
+#    import time
 
-    FLOW = 24
-    EN = 25
+#    FLOW = 24
+    EN = 24
     DIR = 23
     STEP = 18
     
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(Motor.EN, GPIO.out)
-    GPIO.setup(Motor.DIR, GPIO.out)
-    GPIO.setup(Motor.STEP, GPIO.out)
-    GPIO.setup(Motor.FLOW, GPIO.input)
+    GPIO.setup(EN, GPIO.OUT)
+    GPIO.setup(DIR, GPIO.OUT)
+    GPIO.setup(STEP, GPIO.OUT)
+#    GPIO.setup(FLOW, GPIO.input)
  #   GPIO.setup(17, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
     def __init__(self):
@@ -72,9 +75,9 @@ class Motor:
         GPIO.cleanup()
 
 
-
-
-
+if __name__ == '__main__':
+    pass
+    
 
 
 
