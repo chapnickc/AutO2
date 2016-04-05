@@ -58,7 +58,6 @@ class PlotTab(BoxLayout):
         self.add_buttons()
 
 
-
     def get_fc(self, i):
         """
         Build the figure 
@@ -91,16 +90,20 @@ class PlotTab(BoxLayout):
         print ('Flow Listening canceled')
 
     def add_buttons(self):
+        bl = BoxLayout(size_hint = (1,0.5))
 
-        b = Button(text='Press to read from flow sensor',
-                 size_hint = (0.5, 0.1))
+        b = Button(text='Press to read from flow sensor')
+                 #size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.start_flow_listen())
-        self.add_widget(b)
+        #self.add_widget(b)
+        bl.add_widget(b)
 
-        b = Button(text='Press to stop reading from flow sensor',
-                 size_hint = (0.5, 0.1))
+        b = Button(text='Press to stop reading from flow sensor')
+                 #size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.stop_flow_listen())
-        self.add_widget(b)
+        #self.add_widget(b)
+        bl.add_widget(b)
+        self.add_widget(bl)
 
 
 
