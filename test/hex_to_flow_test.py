@@ -12,29 +12,28 @@ def read_sensor():
     """
     try:
         # get the flow as a hex value
-        command = 'sudo i2cget -y 1 {}'.format(self.i2c_bus)
+        command = 'sudo i2cget -y 1 {}'.format('0x49')
         p = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 
         # get the output from the process and convert from 
         # byte code to a string
         hex_value = str(p.communicate()[0])
-        print (hex_value)
 
         if not hex_value == '':
             dec_value = int(hex_value, 16)
             flow_value = 15*((dec_value/16384) - 0.1)/0.8
-            print (flow_value)
         elif hex_value == '':
             raise OSError
     except OSError as e:
-			#print ("Cant't read sensor: {}".format(e))
-
+	pass
     else:
-        #self.data_file.write(flow_value)
-        return flow_value
+        return flow_value, hex_value
 
 if __name__ == '__main__':
     while True:
-        value = read_sensor()
-        print (value)
+        flow_value, hex_value  = read_sensor()
+        
+        result = 'Flow value: {}\tHex Value: {}'.format(flow_value, hex_value)
+        print (result)
+
         sleep(0.5)
