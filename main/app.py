@@ -107,19 +107,21 @@ class PlotTab(BoxLayout):
 
 
 
+
 class OxygenAdjustment(BoxLayout):
-    def __init__(self, setting_label, percent,  **kwargs):
+    def __init__(self, setting_label, init_value,  **kwargs):
         super(OxygenAdjustment, self).__init__(**kwargs)
         self.orientation = 'vertical'
         self.setting_label = setting_label
-        self.percent = percent
+
+        self.value = init_value
 
 
         top = Label(text = setting_label,
                     font_size = 35,
                     color = [0,0,0,1],
                     size_hint = (1,0.4))
-        middle = Label(text = str(percent),
+        self.middle = Label(text = str(self.value),
                        font_size = 30,
                        color = [0,0,0,1],
                        size_hint = (1, 0.5))
@@ -139,22 +141,31 @@ class OxygenAdjustment(BoxLayout):
                           background_color = [0.1, 0.3906, 0.70, 1])
 
 
+        up_arrow.bind(on_press = lambda x: self.increase_value())
+        down_arrow.bind(on_press = lambda x: self.decrease_value())
+
         dials.add_widget(up_arrow)
         dials.add_widget(down_arrow)
 
         self.add_widget(top)
-        self.add_widget(middle)
+        self.add_widget(self.middle)
         self.add_widget(dials)
 
+    def increase_value(self):
+        self.value += 1
+        self.middle.text = str(self.value)
 
+    def decrease_value(self):
+        self.value -= 1
+        self.middle.text = str(self.value)
 
 class ParametersTab(BoxLayout):
     def __init__(self, **kwargs):
         super(ParametersTab, self).__init__(**kwargs)
-        self.add_widget(OxygenAdjustment(setting_label = 'SPO2 High',
-                                         percent = '99 %'))
-        self.add_widget(OxygenAdjustment(setting_label = 'SPO2 Low',
-                                         percent = '87 %'))
+        self.add_widget(OxygenAdjustment(setting_label = 'SPO_2 High', init_value = 99))
+        self.add_widget(OxygenAdjustment(setting_label = 'SPO_2 Low', init_value = 87))
+        self.add_widget(OxygenAdjustment(setting_label = 'Delta T', init_value = 10))
+        self.add_widget(OxygenAdjustment(setting_label = 'Delta Flow', init_value = 10))
 
 
 class Tab(BoxLayout, AndroidTabsBase):
@@ -180,7 +191,7 @@ class O2App(App):
 		return tabs
 
 if __name__ == '__main__':
-    o2app().run()
+    O2App().run()
 
 
 
