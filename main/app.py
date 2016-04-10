@@ -90,7 +90,7 @@ class PlotTab(BoxLayout):
         print ('Flow Listening canceled')
 
     def add_buttons(self):
-        bl = BoxLayout(size_hint = (1,0.5))
+        bl = BoxLayout(size_hint = (1,0.25))
 
         b = Button(text='Press to read from flow sensor')
                  #size_hint = (0.5, 0.1))
@@ -180,7 +180,7 @@ class O2App(App):
 		return tabs
 
 if __name__ == '__main__':
-    O2App().run()
+    o2app().run()
 
 
 

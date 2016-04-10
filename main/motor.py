@@ -1,5 +1,7 @@
+from __future__ import division
 import RPi.GPIO as GPIO
 import time
+
 
 class Motor:
 
@@ -16,7 +18,7 @@ class Motor:
 
 #    FLOW = 24
     EN = 24
-    DIR = 23
+    DIR = 23 
     STEP = 18
     
     GPIO.setmode(GPIO.BCM)
@@ -31,8 +33,9 @@ class Motor:
         self._flow = 0
         self._stepangle = 1.8
         self._rev = 360
-        self._f = 1000
+        self._f = 500
         self._DC = 50
+        GPIO.output(Motor.EN, GPIO.LOW)      #Enable motor
 
     def calibrate(self):
         self._flow = GPIO.read(Motor.FLOW)
@@ -40,16 +43,17 @@ class Motor:
     def upFlow(self,steps):
         """ Increase the flow oxygen by rotating stepper motor specified number of steps."""
 
-        GPIO.output(Motor.EN, GPIO.HIGH)      #Enable motor
+
         GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
 
         self._pos = self._pos + steps
         pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
         pwm.start(self._DC)             # sets the output to a 50% duty cycle
-        time.sleep(float(steps)/1000)   # no. of ms = no. of steps
+        time.sleep(float(steps)/self._f)   # no. of ms = no. of steps
+
         pwm.stop()
         GPIO.output(Motor.STEP,False)
-        GPIO.output(Motor.EN,False)
+ #       GPIO.output(Motor.EN,False)
 
     def downFlow(self,steps):
         """ Decrease the flow oxygen by rotating stepper motor specified number of steps."""

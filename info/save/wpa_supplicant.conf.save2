@@ -1,0 +1,18 @@
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+	ssid="West Pine Lofts WiFi"
+	key_mgmt=NONE
+}
+
+
+network={
+	ssid="sluguest"
+	key_mgmt=NONE
+}
+
+network={
+	ssid="SLU-users"
+	key_mgmt=NONE
+}
