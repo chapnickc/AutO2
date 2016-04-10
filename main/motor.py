@@ -1,9 +1,9 @@
 from __future__ import division
 import RPi.GPIO as GPIO
 import time
+from time import sleep
 
-
-class Motor:
+class Motor(object):
 
     """ Motor Class which is responsible for turning the motor and keeping track of
         motor rotational position and thus current flow.
@@ -33,7 +33,7 @@ class Motor:
         self._flow = 0
         self._stepangle = 1.8
         self._rev = 360
-        self._f = 500
+        self._f = 1000
         self._DC = 50
         GPIO.output(Motor.EN, GPIO.LOW)      #Enable motor
 
@@ -79,8 +79,32 @@ class Motor:
         GPIO.cleanup()
 
 
+class Motor2(Motor):
+    def __init__(self):
+        super(Motor2, self).__init__()
+    
+
+    def upFlow(self, steps):
+        GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
+
+        self._pos = self._pos + steps
+
+        for step in range(steps):
+            GPIO.output(Motor.STEP, GPIO.LOW)
+            sleep(0.001)
+            GPIO.output(Motor.STEP, GPIO.HIGH)
+            sleep(0.001)
+            
+        GPIO.output(Motor.STEP,False)
+
+
+    
+
+
 if __name__ == '__main__':
-    pass
+    m = Motor2()
+    m.upFlow(20)
+    m.shutdown()
     
 
 

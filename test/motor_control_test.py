@@ -7,7 +7,7 @@ GPIO.setmode(GPIO.BCM)
 #Declare I/O
 step = 18
 
-enable =  25
+enable =  24
 direction = 23
 freq = 1000         # lowest frequency
 
@@ -24,12 +24,12 @@ pwm = GPIO.PWM(step, freq)
 # sets the output to a 50% duty cycle
 pwm.start(50)
 
-for flip in range(3):
+
+for flip in range(5):
     GPIO.output(direction, True)
-    sleep(0.05)
+#    sleep(0.040)
 #    GPIO.output(direction, False)
-    sleep(0.05)
-    sleep(1)
+
 
 #sleep(5.5)
 #sleep(10)
