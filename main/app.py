@@ -12,7 +12,6 @@ from flow_reader import FlowReader
 
 fr = FlowReader()
 
-
 kv = """
 <PlotTab>:
     orientation: 'vertical'
@@ -90,57 +89,46 @@ class PlotTab(BoxLayout):
         print ('Flow Listening canceled')
 
     def add_buttons(self):
+        # initialize the container for the buttons
         bl = BoxLayout(size_hint = (1,0.25))
 
         b = Button(text='Press to read from flow sensor')
-                 #size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.start_flow_listen())
-        #self.add_widget(b)
         bl.add_widget(b)
 
         b = Button(text='Press to stop reading from flow sensor')
-                 #size_hint = (0.5, 0.1))
         b.bind(on_press = lambda x: self.stop_flow_listen())
-        #self.add_widget(b)
         bl.add_widget(b)
+
+        b = Button(text = 'Start')
+        b.bind(on_press = lambda x: None)
+        bl.add_widget(b)
+
         self.add_widget(bl)
 
 
-
-
 class OxygenAdjustment(BoxLayout):
-    def __init__(self, setting_label, init_value,  **kwargs):
+    def __init__(self, setting_label, init_value, min_value = 75, max_value = 100,  **kwargs):
         super(OxygenAdjustment, self).__init__(**kwargs)
         self.orientation = 'vertical'
         self.setting_label = setting_label
+        self.value = float(init_value)
+        self.min_value = float(min_value)
+        self.max_value = float(max_value)
 
-        self.value = init_value
+        self.build()
 
+    def build(self):
+        top = Label(text = self.setting_label, font_size = 35, color = [0,0,0,1], size_hint = (1,0.4))
 
-        top = Label(text = setting_label,
-                    font_size = 35,
-                    color = [0,0,0,1],
-                    size_hint = (1,0.4))
-        self.middle = Label(text = str(self.value),
-                       font_size = 30,
-                       color = [0,0,0,1],
-                       size_hint = (1, 0.5))
+        self._middle = Label(text = str(self.value), font_size = 30, color = [0,0,0,1], size_hint = (1, 0.5))
         
-        dials = BoxLayout(orientation = 'vertical',
-                          padding = [20,5],
-                          spacing = 2,
-                          size_hint = (1,1))
+        dials = BoxLayout(orientation = 'vertical', padding = [20,5], spacing = 2, size_hint = (1,1))
         
-        up_arrow = Button(text = 'UP', 
-                          font_size = 20,
-                          background_normal = '',
-                          background_color = [0.1, 0.3906, 0.70, 1])
-        down_arrow = Button(text = 'DOWN',
-                          font_size = 20,
-                          background_normal = '',
-                          background_color = [0.1, 0.3906, 0.70, 1])
+        up_arrow = Button(text = 'UP', font_size = 20, background_normal = '', background_color = [0.1, 0.3906, 0.70, 1])
+        down_arrow = Button(text = 'DOWN', font_size = 20, background_normal = '', background_color = [0.1, 0.3906, 0.70, 1])
 
-
+        # binding the functions to increase and decrease the values to the buttons 
         up_arrow.bind(on_press = lambda x: self.increase_value())
         down_arrow.bind(on_press = lambda x: self.decrease_value())
 
@@ -148,24 +136,53 @@ class OxygenAdjustment(BoxLayout):
         dials.add_widget(down_arrow)
 
         self.add_widget(top)
-        self.add_widget(self.middle)
+        self.add_widget(self._middle)
         self.add_widget(dials)
 
     def increase_value(self):
-        self.value += 1
-        self.middle.text = str(self.value)
+        if self.value < self.max_value:
+            self.value += 1
+        else:
+            self.value = self.max_value
+        self._middle.text = str(self.value)
 
     def decrease_value(self):
-        self.value -= 1
-        self.middle.text = str(self.value)
+        if self.value > self.min_value:
+            self.value -= 1
+        else:
+            self.value = self.min_value
+        self._middle.text = str(self.value)
+
+
+class DeltaFlow(OxygenAdjustment):
+    def __init__(self, setting_label = 'Delta Flow', **kwargs):
+        super(DeltaFlow, self).__init__(setting_label, **kwargs)
+
+    def increase_value(self):
+        if self.value < self.max_value:
+            # increase by 1/8 L 
+            self.value += 0.125
+        else:
+            self.value = self.max_value
+        self._middle.text = str(self.value)
+
+    def decrease_value(self):
+        if self.value > self.min_value:
+            # decrease by 1/8 L 
+            self.value -= 0.125
+        else:
+            self.value = self.min_value
+        self._middle.text = str(self.value)
+
+
 
 class ParametersTab(BoxLayout):
     def __init__(self, **kwargs):
         super(ParametersTab, self).__init__(**kwargs)
         self.add_widget(OxygenAdjustment(setting_label = 'SPO_2 High', init_value = 99))
         self.add_widget(OxygenAdjustment(setting_label = 'SPO_2 Low', init_value = 87))
-        self.add_widget(OxygenAdjustment(setting_label = 'Delta T', init_value = 10))
-        self.add_widget(OxygenAdjustment(setting_label = 'Delta Flow', init_value = 10))
+        self.add_widget(OxygenAdjustment(setting_label = 'Delta T', init_value = 10, min_value = 0.5, max_value = 10))
+        self.add_widget(DeltaFlow(init_value = 1/8, min_value = 0, max_value = 1))
 
 
 class Tab(BoxLayout, AndroidTabsBase):
