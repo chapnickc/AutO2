@@ -8,9 +8,16 @@ class wean:
     """
     To take user-specified parameters for patient SpO2 weaning. 
     Parameters are inputs to the class when called in app.py
+    
+        self.SpO2_high =  float [%]
+        self.SpO2_low =   float [%]
+        self.flow_start = float [LPM]
+        self.delt_flow =  float [LPM] 
+        self.delt_Tstep = int [minutes]
+    
     """
     
-    def __init__(self, SpO2_high = 98, SpO2_low = 92, flow_start = 3, delt_flow = 0.5, delt_Tstep = 20):
+    def __init__(self, SpO2_high = 98, SpO2_low = 92, flow_start = 3, delt_flow = 0.5, delt_Tstep = 1):
         self.SpO2_high = SpO2_high
         self.SpO2_low = SpO2_low
         self.flow_start = flow_start
