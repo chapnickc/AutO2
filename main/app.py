@@ -117,7 +117,12 @@ class PlotTab(BoxLayout):
         On press will begin and plot a patients weaning according to wean parameters from class ParametersTab().
         Will also show the outline of the idealize wean from the start.
         Will call stabilize() if patient goes out of range.
+        
+        should all of the wean mechanics be housed in this method, or do we have this method call a wean class that houses said mechanics
         """
+        #w = wean(SpO2_h_widget.value, SpO2_l_widget.value, start_flow_widget.value, delt_flow_widget.value, delt_Tstep.value)
+        #w.showWean
+        #w.startWean
 
     def add_buttons(self):
         """
@@ -233,7 +238,9 @@ class ParametersTab(BoxLayout):
     """
     Holds all the parameters
     
-    %CHANGE --> we could store wean parameters as such below during initialization. 
+    %CHANGE --> we could store default wean parameters as such below during initialization. 
+    These would be "default" because they would not be used again. If we needed to grab
+    the current parameter value we would get access it through the OxygenAdjustment class (see def build() comments below).
     self.SpO2_high =  float [%]
     self.SpO2_low =   float [%]
     self.flow_start = float [LPM]
@@ -242,17 +249,28 @@ class ParametersTab(BoxLayout):
     """
     def __init__(self, **kwargs):
         super(ParametersTab, self).__init__(**kwargs)
-
         self.build()
 
     def build(self):
         """
         Builds the page
         
-        WHAT IF we said:
+        WHAT IF we said (assuming we add the attributes seen above in init):
+        "
+        SpO2_h_widget = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = self.SpO2_high)
+        SpO2_l_widget = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] Low', init_value = self.SpO2_low)
+        ....
+        self.add_widget(SpO2_h_widget)
+        self.add_widget(SpO2_l_widget)
+        ...
+        "
         
-        SpO2_high = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99)
-        SpO2_high = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99)
+        Then in PlotTab.wean() (when pressed to start) can grab the needed values as such:
+        "
+        SpO2_high = SpO2_h_widget.value
+        SpO2_low  = SpO2_l_widget.value
+        ...
+        "
         
         """
         self.add_widget(OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99))
