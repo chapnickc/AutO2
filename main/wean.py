@@ -42,8 +42,8 @@ class wean:
             
         wean_values.append(0)
         wean_values.append(0)
+        time_values.append(drops*self.delt_Tstep)
         time_values.append((drops+1)*self.delt_Tstep)
-        time_values.append((drops+2)*self.delt_Tstep)
         
         #Plot Ideal Wean
         self.ax1.clear()
