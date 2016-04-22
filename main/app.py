@@ -110,6 +110,14 @@ class PlotTab(BoxLayout):
         """
         self.listener.cancel()
         print ('Flow Listening canceled')
+        
+    #CHANGED - ADDED wean method - PI 4/22/16
+    def wean(self)
+        """
+        On press will begin and plot a patients weaning according to wean parameters from class ParametersTab().
+        Will also show the outline of the idealize wean from the start.
+        Will call stabilize() if patient goes out of range.
+        """
 
     def add_buttons(self):
         """
@@ -118,15 +126,15 @@ class PlotTab(BoxLayout):
         """
         bl = BoxLayout(size_hint = (1,0.25))
 
-        b = Button(text='Press to read from flow sensor')
+        b = Button(text='Monitoring Mode')                              #CHANGED TEXT - PI 4/22/16
         b.bind(on_press = lambda x: self.start_flow_listen())
         bl.add_widget(b)
 
-        b = Button(text='Press to stop reading from flow sensor')
+        b = Button(text='Pause Monitoring')                             #CHANGED TEXT - PI 4/22/16
         b.bind(on_press = lambda x: self.stop_flow_listen())
         bl.add_widget(b)
 
-        b = Button(text = 'Start')
+        b = Button(text = 'Start Wean')                                 #CHANGED TEXT - PI 4/22/16
         b.bind(on_press = lambda x: None)
         bl.add_widget(b)
 
@@ -224,6 +232,13 @@ class DeltaFlow(OxygenAdjustment):
 class ParametersTab(BoxLayout):
     """
     Holds all the parameters
+    
+    %CHANGE --> we could store wean parameters as such below during initialization. 
+    self.SpO2_high =  float [%]
+    self.SpO2_low =   float [%]
+    self.flow_start = float [LPM]
+    self.delt_flow =  float [LPM] 
+    self.delt_Tstep = int [minutes]
     """
     def __init__(self, **kwargs):
         super(ParametersTab, self).__init__(**kwargs)
@@ -233,6 +248,12 @@ class ParametersTab(BoxLayout):
     def build(self):
         """
         Builds the page
+        
+        WHAT IF we said:
+        
+        SpO2_high = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99)
+        SpO2_high = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99)
+        
         """
         self.add_widget(OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99))
         self.add_widget(OxygenAdjustment(setting_label = 'SpO[sub]2[/sub] Low', init_value = 87))
