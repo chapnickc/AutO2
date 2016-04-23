@@ -112,7 +112,7 @@ class PlotTab(BoxLayout):
         print ('Flow Listening canceled')
         
     #CHANGED - ADDED wean method - PI 4/22/16
-    def wean(self)
+    def wean(self):
         """
         On press will begin and plot a patients weaning according to wean parameters from OxygenParameter() instances made in OxygenPara.
         Will also show the outline of the idealize wean from the start.
@@ -247,8 +247,14 @@ class ParametersTab(BoxLayout):
     self.delt_flow_default =  float [LPM] 
     self.delt_Tstep_default = int [minutes]
     """
-    def __init__(self, **kwargs):
+    def __init__(self, params = {},  **kwargs):
         super(ParametersTab, self).__init__(**kwargs)
+        self.params = params
+        self.SpO2_high = float(99)
+        self.SpO2_low = float(86)
+        self.flow_start = float(0.5)
+        self.delt_flow = float(1/8)
+        self.delt_Tstep = int(30)
         self.build()
 
     def build(self):
@@ -273,16 +279,24 @@ class ParametersTab(BoxLayout):
         "
         
         """
-        self.add_widget(OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = 99))
-        self.add_widget(OxygenAdjustment(setting_label = 'SpO[sub]2[/sub] Low', init_value = 87))
-        self.add_widget(OxygenAdjustment(setting_label = 'Delta T', init_value = 10, min_value = 0.5, max_value = 10))
-        self.add_widget(DeltaFlow(init_value = 1/8, min_value = 0, max_value = 1))
 
+        self.params['SPO2_HIGH'] = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = self.SpO2_high)
+        self.params['SPO2_LOW'] = OxygenAdjustment(setting_label = 'SpO[sub]2[/sub] Low', init_value = self.SpO2_low)
+        self.params['DELT_T'] = OxygenAdjustment(setting_label = 'Delta T', init_value = self.delt_Tstep , min_value = 0.5, max_value = 10)
+        self.params['DELT_FLOW'] = DeltaFlow(init_value = self.delt_flow, min_value = 0, max_value = 1)
+
+        for param in self.params.values():
+            self.add_widget(param)
+
+        self.params['FLOW_START'] = self.flow_start 
 
 class Tab(BoxLayout, AndroidTabsBase):
     def __init__ (self, **kwargs):
         super(Tab, self).__init__(**kwargs)
 
+# instantiate params tab so the 
+# values of the parameters can be accessed gloabally
+params_tab = ParametersTab()
 
 class O2App(App):
     def __init__(self, **kwargs):
@@ -295,7 +309,7 @@ class O2App(App):
         tabs.add_widget(tab)
 
         tab = Tab(text = 'Parameters')
-        tab.add_widget(ParametersTab())
+        tab.add_widget(params_tab)
         tabs.add_widget(tab)
 
         return tabs
@@ -305,5 +319,7 @@ class O2App(App):
 if __name__ == '__main__':
     # instantiate the flow reader for the funtions expecting it
     fr = FlowReader()
+    print(params_tab.params['SPO2_HIGH'].value) 
     O2App().run()
+
 
