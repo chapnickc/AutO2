@@ -3,7 +3,7 @@ import time
 import matplotlib.pyplot as plt
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 
-class wean:
+class Wean:
 
     """
     To take user-specified parameters for patient SpO2 weaning. 
@@ -17,7 +17,7 @@ class wean:
     
     """
     
-    def __init__(self, SpO2_high = 98, SpO2_low = 92, flow_start = 3, delt_flow = 0.5, delt_Tstep = 1):
+    def __init__(self, SpO2_high, SpO2_low, flow_start, delt_flow, delt_Tstep):
         self.SpO2_high = SpO2_high
         self.SpO2_low = SpO2_low
         self.flow_start = flow_start
@@ -59,4 +59,9 @@ class wean:
         #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
         self.ax1.figure.canvas.draw()
       
-    #def startWean(self):
+   # def startWean(self):
+  #      flow = fr.read_sensor()
+ #       o2vitals = 97
+#        self.ax1.plot(clock, flow, linewidth = 3)
+   #     self.ax2.plot(clock, o2vitals, linewidth = 3)
+        
