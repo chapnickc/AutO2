@@ -1,7 +1,14 @@
-import RPi.GPIO as GPIO
 import time
 import matplotlib.pyplot as plt
-from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
+
+# this module is currently not used by the class
+# so it is okay if it is not loaded
+try:
+	import RPi.GPIO as GPIO
+except RuntimeError as e:
+	print (e)
+
+
 
 class Wean:
 
@@ -24,23 +31,14 @@ class Wean:
         self.delt_flow = delt_flow
         self.delt_Tstep = delt_Tstep
         
-    def showWean(self):
-        
-        #Build Figure
-        fig = plt.figure()
-        ax1 = fig.add_subplot(1,1,1) 
-        ax2 = ax1.twinx()
-
-        ax1.set_ylabel('O2 LPM')
-        ax2.set_ylabel(r'SpO$_2$')
-        wid = FigureCanvas(fig)
-        
-        fig.canvas.mpl_connect('axes_enter_event', enter_axes)
-        
+    def get_wean(self):
+      
         #Calculate Ideal Piecewise Wean
         wean_values = list()
         time_values = list()
+        print (self.flow_start, self.delt_flow)
         drops = int(self.flow_start/self.delt_flow)
+
         for k in range(drops):
             wean_values.append(self.flow_start - k*self.delt_flow)
             wean_values.append(self.flow_start - k*self.delt_flow)
@@ -52,13 +50,9 @@ class Wean:
         time_values.append(drops*self.delt_Tstep)
         time_values.append((drops+1)*self.delt_Tstep)
         
-        #Plot Ideal Wean
-        self.ax1.clear()
-        self.ax1.plot(time_values, wean_values, linewidth = 3)
-
-        #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
-        self.ax1.figure.canvas.draw()
+        values = (time_values, wean_values)
       
+        return values
    # def startWean(self):
   #      flow = fr.read_sensor()
  #       o2vitals = 97

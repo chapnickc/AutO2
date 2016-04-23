@@ -1,3 +1,4 @@
+from __future__ import division 
 from kivy.app import App
 from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout 
@@ -9,7 +10,7 @@ from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
 from kivy.garden.androidtabs import *
 
 from flow_reader import FlowReader
-
+from Wean import Wean
 
 kv = """
 <PlotTab>:
@@ -53,7 +54,7 @@ class PlotTab(BoxLayout):
     """
     def __init__(self, *args, **kwargs):
         super(PlotTab, self).__init__(*args, **kwargs)
-        self.listener = None                            # holds the flow listener
+        self.listener = None              # holds the flow listener
         self.wid, self.ax1, self.ax2 = self.get_fc(1)
         self.add_widget(self.wid)
         self.add_buttons()
@@ -112,7 +113,7 @@ class PlotTab(BoxLayout):
         print ('Flow Listening canceled')
         
     #CHANGED - ADDED wean method - PI 4/22/16
-    def wean(self):
+    def plot_wean(self):
         """
         On press will begin and plot a patients weaning according to wean parameters from OxygenParameter() instances made in OxygenPara.
         Will also show the outline of the idealize wean from the start.
@@ -120,6 +121,26 @@ class PlotTab(BoxLayout):
         
         should all of the wean mechanics be housed in this method, or do we have this method call a Wean class that houses said mechanics
         """
+        spo2_high = params_tab.params['SPO2_HIGH'].value  
+        spo2_low = params_tab.params['SPO2_LOW'].value  
+        delta_t = params_tab.params['DELT_T'].value
+        delta_flow = params_tab.params['DELT_FLOW'].value 
+        flow_start = params_tab.params['FLOW_START']
+
+
+        w = Wean(spo2_high, spo2_low, flow_start, delta_flow, delta_t) 
+        time_values, wean_values = w.get_wean()
+
+        self.ax2.clear()
+        self.ax2.plot(time_values, wean_values, linewidth = 3)
+
+        #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
+        self.ax2.figure.canvas.draw()
+        print ('Drawing wean')
+
+       
+
+
         #w = Wean(SpO2_h_widget.value, SpO2_l_widget.value, start_flow_widget.value, delt_flow_widget.value, delt_Tstep.value)
         #w.showWean
         #w.startWean
@@ -140,7 +161,7 @@ class PlotTab(BoxLayout):
         bl.add_widget(b)
 
         b = Button(text = 'Start Wean')                                 #CHANGED TEXT - PI 4/22/16
-        b.bind(on_press = lambda x: None)
+        b.bind(on_press = lambda x: self.plot_wean())
         bl.add_widget(b)
 
         self.add_widget(bl)
@@ -214,7 +235,7 @@ class DeltaFlow(OxygenAdjustment):
     """
 
     """
-    def __init__(self, setting_label = 'Delta Flow', **kwargs):
+    def __init__(self, setting_label = r'Delta Flow', **kwargs):
         super(DeltaFlow, self).__init__(setting_label, **kwargs)
 
     def increase_value(self):
@@ -252,7 +273,7 @@ class ParametersTab(BoxLayout):
         self.params = params
         self.SpO2_high = float(99)
         self.SpO2_low = float(86)
-        self.flow_start = float(0.5)
+        self.flow_start = float(2)
         self.delt_flow = float(1/8)
         self.delt_Tstep = int(30)
         self.build()
@@ -294,10 +315,6 @@ class Tab(BoxLayout, AndroidTabsBase):
     def __init__ (self, **kwargs):
         super(Tab, self).__init__(**kwargs)
 
-# instantiate params tab so the 
-# values of the parameters can be accessed gloabally
-params_tab = ParametersTab()
-
 class O2App(App):
     def __init__(self, **kwargs):
         super(O2App, self).__init__(**kwargs)
@@ -317,6 +334,10 @@ class O2App(App):
 
 
 if __name__ == '__main__':
+    # instantiate params tab so the 
+    # values of the parameters can be accessed gloabally
+    params_tab = ParametersTab()
+
     # instantiate the flow reader for the funtions expecting it
     fr = FlowReader()
     print(params_tab.params['SPO2_HIGH'].value) 
