@@ -37,8 +37,14 @@ class Wean:
         wean_values = list()
         time_values = list()
         print (self.flow_start, self.delt_flow)
-        drops = int(self.flow_start/self.delt_flow)
+        try:
+            drops = int(self.flow_start/self.delt_flow)
+        except ZeroDivisionError as e:
+            print (e)
 
+            values = ((0, 666), (self.flow_start, self.flow_start))
+            return values
+            
         for k in range(drops):
             wean_values.append(self.flow_start - k*self.delt_flow)
             wean_values.append(self.flow_start - k*self.delt_flow)

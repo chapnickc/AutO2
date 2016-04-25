@@ -1,7 +1,7 @@
 """
 The main application program for our device on demo day.
 This is based off of the original application.py program.
-""""
+"""
 
 from kivy.app import App
 from kivy.lang import Builder

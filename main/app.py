@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.boxlayout import BoxLayout 
 from kivy.lang import Builder
 from kivy.clock import Clock
+from kivy.utils import escape_markup
 
 import matplotlib.pyplot as plt
 from kivy.garden.matplotlib.backend_kivyagg import FigureCanvas
@@ -69,11 +70,13 @@ class PlotTab(BoxLayout):
         ax1 = fig.add_subplot(1,1,1) 
         ax2 = ax1.twinx()
 
+        #fig.text(1, 0.5, 'SpO2', ha = 'center', va = 'center')
+        #fig.text(0.5, 0.04, 'Time', ha = 'center', va = 'center')
         ax1.set_ylabel('Flow Data')
         ax2.set_ylabel(r'SpO$_2$')
         wid = FigureCanvas(fig)
         
-        fig.canvas.mpl_connect('axes_enter_event', enter_axes)
+        # fig.canvas.mpl_connect('axes_enter_event', enter_axes)
         
         return wid, ax1, ax2
 
@@ -109,8 +112,11 @@ class PlotTab(BoxLayout):
         Deschedules the plot_flow() function. Bound to the 
         'Stop reading from flow sensor()'
         """
-        self.listener.cancel()
-        print ('Flow Listening canceled')
+        try:
+            self.listener.cancel()
+            print ('Flow Listening canceled')
+        except AttributeError as e:
+            print (e)
         
     #CHANGED - ADDED wean method - PI 4/22/16
     def plot_wean(self):
@@ -125,14 +131,17 @@ class PlotTab(BoxLayout):
         spo2_low = params_tab.params['SPO2_LOW'].value  
         delta_t = params_tab.params['DELT_T'].value
         delta_flow = params_tab.params['DELT_FLOW'].value 
-        flow_start = params_tab.params['FLOW_START']
+        flow_start = params_tab.params['FLOW_START'].value
 
 
         w = Wean(spo2_high, spo2_low, flow_start, delta_flow, delta_t) 
         time_values, wean_values = w.get_wean()
 
+
+        self.ax1.set_ylabel('Flow Data')
+        self.ax2.set_ylabel(r'SpO$_2$')
         self.ax2.clear()
-        self.ax2.plot(time_values, wean_values, linewidth = 3)
+        self.ax2.plot(time_values, wean_values, 'red', linewidth = 3)
 
         #plt.axis([len(fr.values)-200, len(fr.values)+10, min(fr.values)-5, max(fr.values) + 2])
         self.ax2.figure.canvas.draw()
@@ -233,9 +242,10 @@ class OxygenAdjustment(BoxLayout):
 
 class DeltaFlow(OxygenAdjustment):
     """
-
+	"\N{GREEK CAPITAL LETTER DELTA"	
     """
-    def __init__(self, setting_label = r'Delta Flow', **kwargs):
+
+    def __init__(self, setting_label = 'Delta \nFlow', **kwargs):
         super(DeltaFlow, self).__init__(setting_label, **kwargs)
 
     def increase_value(self):
@@ -301,15 +311,15 @@ class ParametersTab(BoxLayout):
         
         """
 
-        self.params['SPO2_HIGH'] = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = self.SpO2_high)
-        self.params['SPO2_LOW'] = OxygenAdjustment(setting_label = 'SpO[sub]2[/sub] Low', init_value = self.SpO2_low)
-        self.params['DELT_T'] = OxygenAdjustment(setting_label = 'Delta T', init_value = self.delt_Tstep , min_value = 0.5, max_value = 10)
+        self.params['SPO2_HIGH'] = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] \nHigh', init_value = self.SpO2_high)
+        self.params['SPO2_LOW'] = OxygenAdjustment(setting_label = 'SpO[sub]2[/sub] \nLow', init_value = self.SpO2_low)
+        self.params['DELT_T'] = OxygenAdjustment(setting_label = 'Delta \nTime', init_value = self.delt_Tstep , min_value = 0.5, max_value = 10)
         self.params['DELT_FLOW'] = DeltaFlow(init_value = self.delt_flow, min_value = 0, max_value = 1)
+        self.params['FLOW_START'] = OxygenAdjustment(setting_label = 'Starting \nFlow', init_value = self.flow_start, min_value = 0, max_value = 15)
 
         for param in self.params.values():
             self.add_widget(param)
 
-        self.params['FLOW_START'] = self.flow_start 
 
 class Tab(BoxLayout, AndroidTabsBase):
     def __init__ (self, **kwargs):
