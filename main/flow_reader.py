@@ -1,5 +1,5 @@
 #!/usr/bin/env
-
+from __future__ import division
 import subprocess
 import re 		 # regex module. Using it to grab digits from file names
 
@@ -91,6 +91,18 @@ class FlowReader:
 		# modify the attribute
 		self.data_file = f
 
+	def _process_data(self, hex_value):
+		"""
+		converts a hex value to the appropriate flow value 
+		using the equation from the honeywell zepher 
+		data sheet.
+		"""
+		dec_value = int(hex_value, 16)
+		flow_value = 15*((dec_value/16384) - 0.1)/0.8
+		return flow_value
+
+
+
 
 	def read_sensor(self):
 		"""read from the flow sensor. convert hex values to flow values and append the 
@@ -101,14 +113,23 @@ class FlowReader:
 			command = 'sudo i2cget -y 1 {}'.format(self.i2c_bus)
 			p = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 
-			# get the output from the process and convert from 
-			# byte code to a string
-			hex_value = str(p.communicate()[0])
+			# get the output from the process and convert from byte code to a string
+			p.wait()
+			first_byte = str(p.communicate()[0]).strip()
+
+			# grab the next byte to obtain the total value
+			p = subprocess.Popen(command.split(), stdout = subprocess.PIPE)
+			p.wait()
+						
+			second_byte = str(p.communicate()[0]).strip()
+			
+			# concatenate the two bytes into the appropriate hex string	
+			hex_value = first_byte + second_byte[2:]
 			print (hex_value)
 
 			if not hex_value == '':
-				dec_value = int(hex_value, 16)
-				flow_value = 15*((dec_value/16384) - 0.1)/0.8
+				# convert the hex value to a flow value
+				flow_value = self._process_data(hex_value)	
 				print (flow_value)
 			elif hex_value == '':
 				raise OSError
@@ -118,6 +139,12 @@ class FlowReader:
 		else:
 			self.values.append(flow_value)
 			#self.data_file.write(flow_value)
+
+
+
+
+
+
 
 
 # unit testing
