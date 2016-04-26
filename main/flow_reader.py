@@ -128,7 +128,7 @@ if __name__ == '__main__':
 	fr = FlowReader()
 #	fr.create_data_file()
 
-	for i in range(10):
+	for i in range(15):
 		fr.read_sensor()
 		sleep(0.5)
 #		print (fr.values)
