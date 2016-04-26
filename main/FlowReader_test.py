@@ -100,16 +100,15 @@ class FlowReader_test:
 		converted value to a data file
 		"""
 		try:
-			# get the flow as a hex value
 			command = 'sudo i2cget -y 1 {}'.format(self.i2c_bus)
-			p1 = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
-			p2 = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 
-			# get the output from the process and convert from 
-			# byte code to a string
+			# get each word of 2-word flow data value
+			p1 = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 			w1 = str(p1.communicate()[0])
+			p2 = subprocess.Popen(command.split(), stdout=subprocess.PIPE)
 			w2 = str(p2.communicate()[0])
 
+			# concatenate words together to form overall value
 			hex_value = w2 + w1[2:4]
 			print (hex_value)
 
@@ -126,9 +125,10 @@ class FlowReader_test:
 			self.values.append(flow_value)
 			#self.data_file.write(flow_value)
 			
-	def get_flow(self):
-		self.w1 = FlowReader_test.read_sensor()
-		self.w2 = FlowReader_test.read_sensor()
+	# Another possible method of getting flow data		
+	#def get_flow(self):
+	#	self.w1 = FlowReader_test.read_sensor()
+	#	self.w2 = FlowReader_test.read_sensor()
 
 
 # unit testing
