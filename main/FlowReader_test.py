@@ -136,7 +136,7 @@ if __name__ == '__main__':
 	
 	from time import sleep
 
-	fr = FlowReader()
+	fr = FlowReader_test()
 #	fr.create_data_file()
 
 	for i in range(10):
