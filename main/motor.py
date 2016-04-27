@@ -92,9 +92,9 @@ class Motor2(Motor):
 
         for step in range(steps):
             GPIO.output(Motor.STEP, GPIO.LOW)
-            sleep(0.001)
+            sleep(5)
             GPIO.output(Motor.STEP, GPIO.HIGH)
-            sleep(0.001)
+            sleep(5)
             
         GPIO.output(Motor.STEP,False)
         GPIO.output(Motor.EN,GPIO.HIGH)       #enable the motor
