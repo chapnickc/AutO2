@@ -26,7 +26,7 @@ class Motor(object):
     GPIO.setup(DIR, GPIO.OUT)
     GPIO.setup(STEP, GPIO.OUT)
 #    GPIO.setup(FLOW, GPIO.input)
- #   GPIO.setup(17, GPIO.IN, pull_up_down = GPIO.PUD_UP)
+#   GPIO.setup(17, GPIO.IN, pull_up_down = GPIO.PUD_UP)
 
     def __init__(self):
         self._pos = 0
@@ -40,40 +40,40 @@ class Motor(object):
     def calibrate(self):
         self._flow = GPIO.read(Motor.FLOW)
 
-    def upFlow(self,steps):
-        """ Increase the flow oxygen by rotating stepper motor specified number of steps."""
+#    def upFlow(self,steps):
+#        """ Increase the flow oxygen by rotating stepper motor specified number of steps."""
 
 
-        GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
+#        GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
 
-        self._pos = self._pos + steps
-        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
-        pwm.start(self._DC)             # sets the output to a 50% duty cycle
-        time.sleep(float(steps)/self._f)   # no. of ms = no. of steps
+#        self._pos = self._pos + steps
+#        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
+#        pwm.start(self._DC)             # sets the output to a 50% duty cycle
+#        time.sleep(float(steps)/self._f)   # no. of ms = no. of steps
 
-        pwm.stop()
-        GPIO.output(Motor.STEP,False)
- #       GPIO.output(Motor.EN,False)
+#        pwm.stop()
+#        GPIO.output(Motor.STEP,False)
+##       GPIO.output(Motor.EN,False)
 
-    def downFlow(self,steps):
-        """ Decrease the flow oxygen by rotating stepper motor specified number of steps."""
+#    def downFlow(self,steps):
+#        """ Decrease the flow oxygen by rotating stepper motor specified number of steps."""
 
-        GPIO.output(Motor.EN,GPIO.HIGH)       #Enable motor
-        GPIO.output(Motor.DIR,GPIO.HIGH)      #set direction
+#        GPIO.output(Motor.EN,GPIO.HIGH)       #Enable motor
+#        GPIO.output(Motor.DIR,GPIO.HIGH)      #set direction
 
-        self._pos = self._pos - steps
-        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
-        pwm.start(self._DC)             # sets the output to a 50% duty cycle
-        time.sleep(float(steps)/1000)   # no. of ms = no. of steps
-        pwm.stop()                      #For some reason does not pull STEP low
-        GPIO.output(Motor.STEP,False)
-        GPIO.output(Motor.EN,False)
+#        self._pos = self._pos - steps
+#        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
+#        pwm.start(self._DC)             # sets the output to a 50% duty cycle
+#        time.sleep(float(steps)/1000)   # no. of ms = no. of steps
+#        pwm.stop()                      #For some reason does not pull STEP low
+#        GPIO.output(Motor.STEP,False)
+#        GPIO.output(Motor.EN,False)
 
     def enableMotor(self):
-        GPIO.output(Motor.EN, True)
+        GPIO.output(Motor.EN, False)
 
     def disableMotor(self):
-        GPIO.output(Motor.EN, False)
+        GPIO.output(Motor.EN, True)
 
     def shutdown(self):
         GPIO.cleanup()
@@ -85,7 +85,6 @@ class Motor2(Motor):
     
 
     def upFlow(self, steps):
-        GPIO.output(Motor.EN,GPIO.LOW)       #enable the motor
         GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
 
         self._pos = self._pos + steps
@@ -93,21 +92,32 @@ class Motor2(Motor):
         for step in range(steps):
             GPIO.output(Motor.STEP, GPIO.LOW)
             sleep(0.001)
-            print 'sleep is low'
+            print 'step is low'
             GPIO.output(Motor.STEP, GPIO.HIGH)
             sleep(0.001)
-            print 'sleep is high'
+            print 'step is high'
             
         GPIO.output(Motor.STEP,False)
-        GPIO.output(Motor.EN,GPIO.HIGH)       #enable the motor
 
+    def downFlow(self, steps):
+        GPIO.output(Motor.DIR,GPIO.HIGH)       #set direction
+        self._pos = self._pos - steps
 
-    
-
+        for step in range(steps):
+            GPIO.output(Motor.STEP, GPIO.LOW)
+            sleep(0.001)
+            print 'step is low'
+            GPIO.output(Motor.STEP, GPIO.HIGH)
+            sleep(0.001)
+            print 'step is high'
+            
+        GPIO.output(Motor.STEP,False)
+        
 
 if __name__ == '__main__':
     m = Motor2()
-    m.upFlow(20)
+    #m.upFlow(20)
+    m.enableMotor()
     m.shutdown()
     
 
