@@ -42,25 +42,19 @@ class Motor(object):
 
 #    def upFlow(self,steps):
 #        """ Increase the flow oxygen by rotating stepper motor specified number of steps."""
-
-
 #        GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
-
 #        self._pos = self._pos + steps
 #        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
 #        pwm.start(self._DC)             # sets the output to a 50% duty cycle
 #        time.sleep(float(steps)/self._f)   # no. of ms = no. of steps
-
 #        pwm.stop()
 #        GPIO.output(Motor.STEP,False)
 ##       GPIO.output(Motor.EN,False)
 
 #    def downFlow(self,steps):
 #        """ Decrease the flow oxygen by rotating stepper motor specified number of steps."""
-
 #        GPIO.output(Motor.EN,GPIO.HIGH)       #Enable motor
 #        GPIO.output(Motor.DIR,GPIO.HIGH)      #set direction
-
 #        self._pos = self._pos - steps
 #        pwm = GPIO.PWM(Motor.STEP,self._f)    # sets the pwm to frequency of 1kHz 
 #        pwm.start(self._DC)             # sets the output to a 50% duty cycle
@@ -70,6 +64,7 @@ class Motor(object):
 #        GPIO.output(Motor.EN,False)
 
     def enableMotor(self):
+        " The enable is an enable-low. "
         GPIO.output(Motor.EN, False)
 
     def disableMotor(self):
@@ -118,7 +113,7 @@ if __name__ == '__main__':
     m = Motor2()
     #m.upFlow(20)
     m.enableMotor()
-    #m.shutdown()
+    m.shutdown()
     
 
 
