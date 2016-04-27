@@ -85,21 +85,21 @@ class Motor2(Motor):
     
 
     def upFlow(self, steps):
-        GPIO.output(Motor.EN,GPIO.LOW)       #enable the motor
+        #GPIO.output(Motor.EN,GPIO.LOW)       #enable the motor
         GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
 
         self._pos = self._pos + steps
 
         for step in range(steps):
             GPIO.output(Motor.STEP, GPIO.LOW)
-            sleep(5)
+            sleep(0.001)
             print 'sleep is low'
             GPIO.output(Motor.STEP, GPIO.HIGH)
-            sleep(5)
+            sleep(0.001)
             print 'sleep is high'
             
         GPIO.output(Motor.STEP,False)
-        GPIO.output(Motor.EN,GPIO.HIGH)       #enable the motor
+        #GPIO.output(Motor.EN,GPIO.HIGH)       #enable the motor
 
 
     
