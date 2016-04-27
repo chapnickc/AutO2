@@ -93,8 +93,10 @@ class Motor2(Motor):
         for step in range(steps):
             GPIO.output(Motor.STEP, GPIO.LOW)
             sleep(5)
+            print 'sleep is low'
             GPIO.output(Motor.STEP, GPIO.HIGH)
             sleep(5)
+            print 'sleep is high'
             
         GPIO.output(Motor.STEP,False)
         GPIO.output(Motor.EN,GPIO.HIGH)       #enable the motor
