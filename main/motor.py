@@ -18,8 +18,8 @@ class Motor(object):
 
 #    FLOW = 24
     EN = 25                 #changed for Brian's board 04/26/2016
-    DIR = 24 
-    STEP = 23
+    DIR = 23 
+    STEP = 24
     
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(EN, GPIO.OUT)
@@ -81,16 +81,14 @@ class Motor2(Motor):
 
     def upFlow(self, steps):
         GPIO.output(Motor.DIR,GPIO.LOW)       #set direction
-
         self._pos = self._pos + steps
 
         for step in range(steps):
+            print step
             GPIO.output(Motor.STEP, GPIO.LOW)
             sleep(0.001)
-            print 'step is low'
             GPIO.output(Motor.STEP, GPIO.HIGH)
             sleep(0.001)
-            print 'step is high'
             
         GPIO.output(Motor.STEP,False)
 
@@ -100,20 +98,18 @@ class Motor2(Motor):
         self._pos = self._pos - steps
 
         for step in range(steps):
+            print step
             GPIO.output(Motor.STEP, GPIO.LOW)
             sleep(0.001)
-            print 'step is low'
             GPIO.output(Motor.STEP, GPIO.HIGH)
             sleep(0.001)
-            print 'step is high'
             
         GPIO.output(Motor.STEP,False)
         
 
 if __name__ == '__main__':
     m = Motor2()
-    m.enableMotor
+    #m.enableMotor
     m.upFlow(20)
-    #m.downFlow(20)
-    #m.shutdown()
+    m.shutdown()
 
