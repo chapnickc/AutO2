@@ -18,8 +18,8 @@ class Motor(object):
 
 #    FLOW = 24
     EN = 25                 #changed for Brian's board 04/26/2016
-    DIR = 23 
-    STEP = 24
+    DIR = 24 
+    STEP = 23
     
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(EN, GPIO.OUT)
