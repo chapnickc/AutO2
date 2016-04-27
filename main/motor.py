@@ -116,6 +116,6 @@ if __name__ == '__main__':
     m.upFlow(20)
     #m.downFlow(20)
     m.shutdown()
-    m Motor2()
+    m = Motor2()
     m.enableMotor
 
