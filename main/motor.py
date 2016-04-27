@@ -95,6 +95,7 @@ class Motor2(Motor):
         GPIO.output(Motor.STEP,False)
 
     def downFlow(self, steps):
+        
         GPIO.output(Motor.DIR,GPIO.HIGH)       #set direction
         self._pos = self._pos - steps
 
@@ -111,19 +112,9 @@ class Motor2(Motor):
 
 if __name__ == '__main__':
     m = Motor2()
-    #m.upFlow(20)
-    m.enableMotor()
-    sleep(5)
-    m.enableMotor()
-    #m.shutdown()
-    
-
-
-
-
-
-
-
-
-
+    m.enableMotor
+    m.upFlow(20)
+    #m.downFlow(20)
+    m.shutdown()
+    m.enableMotor
 
