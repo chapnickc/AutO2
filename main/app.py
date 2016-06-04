@@ -1,7 +1,7 @@
-from __future__ import division 
+from __future__ import division
 from kivy.app import App
 from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout 
+from kivy.uix.boxlayout import BoxLayout
 from kivy.lang import Builder
 from kivy.clock import Clock
 from kivy.utils import escape_markup
@@ -49,8 +49,8 @@ def enter_axes(event):
 
 class PlotTab(BoxLayout):
     """
-    This class holds the layout for the tab which displays 
-    data on the plot. It also contains a start button for 
+    This class holds the layout for the tab which displays
+    data on the plot. It also contains a start button for
     the user to begin the oxygen control
     """
     def __init__(self, *args, **kwargs):
@@ -64,10 +64,10 @@ class PlotTab(BoxLayout):
     def get_fc(self, i):
         """
         Build the figure. Adds two axes for flow data and
-        SpO2 data. 
+        SpO2 data.
         """
         fig = plt.figure()
-        ax1 = fig.add_subplot(1,1,1) 
+        ax1 = fig.add_subplot(1,1,1)
         ax2 = ax1.twinx()
 
         #fig.text(1, 0.5, 'SpO2', ha = 'center', va = 'center')
@@ -75,15 +75,14 @@ class PlotTab(BoxLayout):
         ax1.set_ylabel('Flow Data')
         ax2.set_ylabel(r'SpO$_2$')
         wid = FigureCanvas(fig)
-        
+
         # fig.canvas.mpl_connect('axes_enter_event', enter_axes)
-        
         return wid, ax1, ax2
 
     def plot_flow(self):
         """
-        Plot the values from the flow sensor on ax1 
-        and update the figure canvas. Calls the 
+        Plot the values from the flow sensor on ax1
+        and update the figure canvas. Calls the
         read_sensor() function of the FlowReader class
         and then reades from the values in the 'fr' object
         which is an instance of the FlowReader.
@@ -100,8 +99,8 @@ class PlotTab(BoxLayout):
 
     def start_flow_listen(self):
         """
-        It schedules the flow values to be read every 
-        0.5 seconds indefinitely by calling the 
+        It schedules the flow values to be read every
+        0.5 seconds indefinitely by calling the
         plot_flow() method above.
         bound to the "Read from flow sensor button".
         """
@@ -109,7 +108,7 @@ class PlotTab(BoxLayout):
 
     def stop_flow_listen(self):
         """
-        Deschedules the plot_flow() function. Bound to the 
+        Deschedules the plot_flow() function. Bound to the
         'Stop reading from flow sensor()'
         """
         try:
@@ -117,24 +116,24 @@ class PlotTab(BoxLayout):
             print ('Flow Listening canceled')
         except AttributeError as e:
             print (e)
-        
+
     #CHANGED - ADDED wean method - PI 4/22/16
     def plot_wean(self):
         """
         On press will begin and plot a patients weaning according to wean parameters from OxygenParameter() instances made in OxygenPara.
         Will also show the outline of the idealize wean from the start.
         Will call stabilize() if patient goes out of range.
-        
+
         should all of the wean mechanics be housed in this method, or do we have this method call a Wean class that houses said mechanics
         """
-        spo2_high = params_tab.params['SPO2_HIGH'].value  
-        spo2_low = params_tab.params['SPO2_LOW'].value  
+        spo2_high = params_tab.params['SPO2_HIGH'].value
+        spo2_low = params_tab.params['SPO2_LOW'].value
         delta_t = params_tab.params['DELT_T'].value
-        delta_flow = params_tab.params['DELT_FLOW'].value 
+        delta_flow = params_tab.params['DELT_FLOW'].value
         flow_start = params_tab.params['FLOW_START'].value
 
 
-        w = Wean(spo2_high, spo2_low, flow_start, delta_flow, delta_t) 
+        w = Wean(spo2_high, spo2_low, flow_start, delta_flow, delta_t)
         time_values, wean_values = w.get_wean()
 
 
@@ -147,8 +146,6 @@ class PlotTab(BoxLayout):
         self.ax2.figure.canvas.draw()
         print ('Drawing wean')
 
-       
-
 
         #w = Wean(SpO2_h_widget.value, SpO2_l_widget.value, start_flow_widget.value, delt_flow_widget.value, delt_Tstep.value)
         #w.showWean
@@ -156,8 +153,8 @@ class PlotTab(BoxLayout):
 
     def add_buttons(self):
         """
-        Adds all the buttons to the screen using 
-        a BoxLayout 
+        Adds all the buttons to the screen using
+        a BoxLayout
         """
         bl = BoxLayout(size_hint = (1,0.25))
 
@@ -188,7 +185,6 @@ class OxygenAdjustment(BoxLayout):
         self.value = float(init_value)
         self.min_value = float(min_value)
         self.max_value = float(max_value)
-       
 
         # builds it self which it is instantiated
         self.build()
@@ -197,9 +193,9 @@ class OxygenAdjustment(BoxLayout):
         top = Label(text = self.setting_label, font_size = 35, color = [0,0,0,1], size_hint = (1,0.4), markup = True)
 
         self._middle = Label(text = str(self.value), font_size = 30, color = [0,0,0,1], size_hint = (1, 0.5))
-        
+
         dials = BoxLayout(orientation = 'vertical', padding = [20,5], spacing = 2, size_hint = (1,1))
-        
+
         up_arrow = Button(text = 'UP', font_size = 20, background_normal = '', background_color = [0.1, 0.3906, 0.70, 1])
         down_arrow = Button(text = 'DOWN', font_size = 20, background_normal = '', background_color = [0.1, 0.3906, 0.70, 1])
 
@@ -218,8 +214,8 @@ class OxygenAdjustment(BoxLayout):
 
     def increase_value(self):
         """
-        Increases the value of the parameter 
-        displayed on the tab if the value is 
+        Increases the value of the parameter
+        displayed on the tab if the value is
         """
         if self.value < self.max_value:
             self.value += 1
@@ -229,7 +225,7 @@ class OxygenAdjustment(BoxLayout):
 
     def decrease_value(self):
         """
-        Decreases the value of the parameter 
+        Decreases the value of the parameter
         displayed on the tab if it is greate
         than the minimum.
         """
@@ -242,7 +238,7 @@ class OxygenAdjustment(BoxLayout):
 
 class DeltaFlow(OxygenAdjustment):
     """
-	"\N{GREEK CAPITAL LETTER DELTA"	
+	"\N{GREEK CAPITAL LETTER DELTA"
     """
 
     def __init__(self, setting_label = 'Delta \nFlow', **kwargs):
@@ -268,14 +264,14 @@ class DeltaFlow(OxygenAdjustment):
 class ParametersTab(BoxLayout):
     """
     Holds all the parameters
-    
+
     %CHANGE --> we could store default wean parameters as such below during initialization. 
     These would be "default" because they would not be used again. If we needed to grab
     the current parameter value we would get access it through the OxygenAdjustment class (see def build() comments below).
     self.SpO2_high_default =  float [%]
     self.SpO2_low_default =   float [%]
     self.flow_start_default = float [LPM]
-    self.delt_flow_default =  float [LPM] 
+    self.delt_flow_default =  float [LPM]
     self.delt_Tstep_default = int [minutes]
     """
     def __init__(self, params = {},  **kwargs):
@@ -291,7 +287,6 @@ class ParametersTab(BoxLayout):
     def build(self):
         """
         Builds the page
-        
         WHAT IF we said (assuming we add the attributes seen above in init):
         "
         SpO2_h_widget = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] High', init_value = self.SpO2_high_default)
@@ -301,14 +296,12 @@ class ParametersTab(BoxLayout):
         self.add_widget(SpO2_l_widget)
         ...
         "
-        
         Then in PlotTab.wean() (when pressed to start) can grab the needed values as such:
         "
         SpO2_high = SpO2_h_widget.value
         SpO2_low  = SpO2_l_widget.value
         ...
         "
-        
         """
 
         self.params['SPO2_HIGH'] = OxygenAdjustment(setting_label ='SpO[sub]2[/sub] \nHigh', init_value = self.SpO2_high)
@@ -350,7 +343,7 @@ if __name__ == '__main__':
 
     # instantiate the flow reader for the funtions expecting it
     fr = FlowReader()
-    print(params_tab.params['SPO2_HIGH'].value) 
+    print(params_tab.params['SPO2_HIGH'].value)
     O2App().run()
 
 
